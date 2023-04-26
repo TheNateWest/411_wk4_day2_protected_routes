@@ -8,15 +8,22 @@ import Login from './components/Login'
 
 // Write checkAuth function here
 // Check the cookies for a cookie called "loggedIn"
+const checkAuth =(props) => false;
 
 
 // Write ProtectedRoute function here
+const ProtectedRoute = (props) => {
+
+const { component: Component } = props;
+
+return checkAuth() === true ? <Component /> : <Navigate to='/login' />
+}
 
 
 const Router = () => {
     return (
         <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<ProtectedRoute component={Home} />} />
             <Route path="/login" element={<Login/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/car/:id" element={<Car/>} />
